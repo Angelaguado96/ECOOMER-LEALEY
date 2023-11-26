@@ -43,9 +43,7 @@ export default function Menu(props) {
             href="/" 
             prefetch
           >
-        
           Inicio
-       
           </Link>
           </div>
 
