@@ -2,11 +2,19 @@
 const {verificarToken} = require('../utils/handlerJwt')
 
 
-const  autorizacion = (req, res,next)=>{
+const  autorizacion = async (req, res,next)=>{
    const {token }= req.cookies
-   if(!token) return res.send("NO SE ENCONTRO TOKEN")
-   verificarToken(token,req,res)
-   next()
+   console.log("autorizado ",token)
+    if(!token) return res.send("NO SE ENCONTRO TOKEN")
+
+   try {
+    const ususario = await verificarToken(token,req,res)
+      req.user= ususario
+      next()
+      
+   } catch (error) {
+      console.error('Error al verificar token:', error);
+   }
 }
 
 module.exports = {autorizacion}

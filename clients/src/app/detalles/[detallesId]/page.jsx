@@ -16,7 +16,7 @@ const Datelles = ({ params }) => {
   const dispatch = useDispatch();
 
   const info = useSelector((state) => state.storeShopping.dataOneProductos);
-  console.log(info)
+ 
 
    
 
@@ -27,8 +27,9 @@ const Datelles = ({ params }) => {
 
 
   const  handlerProducto= async(infom)=>{
-      console.log(infom)
+    console.log("soy  infomacion de prt",infom)
    dispatch(addProductosToCart(infom))
+
   }
 
   return (
@@ -185,7 +186,7 @@ const Datelles = ({ params }) => {
                   <div> 
 
                   <Button
-                    // type="submit"
+                    type="submit"
                          onChange={()=> {handlerProducto(info)}}
                     className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-whitefocus:outline-none "
                     color="danger"

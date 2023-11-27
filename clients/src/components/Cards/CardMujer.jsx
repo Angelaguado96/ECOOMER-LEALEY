@@ -2,13 +2,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allMujer } from "@/util/http";
-import Link from 'next/link'
+import Link from "next/link";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 export default function CardMujer() {
   const dispatch = useDispatch();
   const infoMujer = useSelector((state) => state.storeShopping.dataMujer);
-
+  console.log(infoMujer);
+  const router = useRouter();
   useEffect(() => {
     dispatch(allMujer());
   }, [dispatch]);
@@ -19,41 +21,45 @@ export default function CardMujer() {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Customers also purchased
         </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {infoMujer.map((product) => (
-            <div key={product.id} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                <img
-                  src={product.imagen.secure_url}
-                  alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <a href={product.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.nombre}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.marca}</p>
+        {infoMujer === "NO SE ENCONTRO TOKEN" ? (
+          router.push("/login")
+        ) : (
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {infoMujer.map((product) => (
+              <div key={product.id} className="group relative">
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                  <img
+                    src={product.imagen.secure_url}
+                    alt={product.imageAlt}
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                  />
                 </div>
-                <p className="text-sm font-medium text-gray-900">
-                  $ {product.precio}
-                </p>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <a href={product.href}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {product.nombre}
+                      </a>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {product.marca}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-gray-900">
+                    $ {product.precio}
+                  </p>
+                </div>
+                <div className="h-5 w-20"></div>
+                <Link href={`/detalles/${product.id}`}>
+                  <Button className="h-6 w-15" color="danger">
+                    Detalle
+                  </Button>
+                </Link>
               </div>
-              <div className="h-5 w-20">
-              </div>
-              <Link href={`/detalles/${product.id}`}>
-              <Button className="h-6 w-15" color="danger">
-                  Detalle
-                </Button>
-              </Link> 
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

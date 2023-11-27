@@ -1,31 +1,27 @@
-
-
 "use client ";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allGils } from "@/util/http";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
+export default function CardGrill() {
+  const dispatch = useDispatch();
+  const infoNiñas = useSelector((state) => state.storeShopping.dataGrils);
+  const router = useRouter();
+  useEffect(() => {
+    dispatch(allGils());
+  }, [dispatch]);
 
-
-
-  
-
-  export default function CardGrill
-  () {
-
-    const dispatch = useDispatch();
-    const infoNiñas = useSelector((state) => state.storeShopping.dataGrils);
-   
-    useEffect(() => {
-      dispatch(allGils());
-    }, [dispatch]);
-
-    return (
-      <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-  
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          Customers also purchased
+        </h2>
+        {infoNiñas === "NO SE ENCONTRO TOKEN" ? (
+          router.push("/login")
+        ) : (
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {infoNiñas.map((product) => (
               <div key={product.id} className="group relative">
@@ -44,20 +40,25 @@ import { Button } from "@nextui-org/react";
                         {product.nombre}
                       </a>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.marca}</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {product.marca}
+                    </p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900"> $ {product.precio}</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    {" "}
+                    $ {product.precio}
+                  </p>
                 </div>
                 <div className="h-5 w-20">
-                <Button className="h-6 w-15" color="danger">Detalle</Button>
+                  <Button className="h-6 w-15" color="danger">
+                    Detalle
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        )}
       </div>
-    )
-  }
-
-
-
+    </div>
+  );
+}

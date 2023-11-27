@@ -1,6 +1,6 @@
 
 const { getNiño } = require("../controllers/ControllerNiños");
-
+const {handlerError}= require('../utils/handlerError')
 
 
 
@@ -9,7 +9,7 @@ const  addNiño = async (req,res)=>{
    try {
       res.status(200).json( await getNiño())
    } catch (error) {
-      res.status(400).json({error:error.message});
+      handlerError(res,"ERROR EN GET NIÑOS",error)
    }
 }
 

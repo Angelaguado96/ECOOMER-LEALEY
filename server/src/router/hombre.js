@@ -5,7 +5,7 @@ const  {addHombres}=require('../handler/HanddlerHombre')
 const {autorizacion}= require('../middleware/autorizacion')
 
 
-router.get('/todos-hombres',addHombres)
+router.get('/todos-hombres',autorizacion,addHombres)
 
 
 
