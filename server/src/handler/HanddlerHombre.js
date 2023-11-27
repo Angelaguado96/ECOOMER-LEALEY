@@ -1,10 +1,13 @@
 const { getHombre } = require("../controllers/ControlerHombre");
+const {handlerError}= require('../utils/handlerError')
+
+
 
 const addHombres = async (req, res) => {
   try {
-    res.status(200).json(await getHombre());
+    res.status(200).json(await getHombre(req));
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    handlerError(res,"ERROR EN GET HOMBRES",error)
   }
 };
 

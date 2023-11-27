@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const {perdiUsuario,crearUsuarios,modificarUsurarios,deleteUser} = require("../handler/HandlerUsers");
+const {perdiUsuario,crearUsuarios,modificarUsurarios,deleteUser,VerifyToken} = require("../handler/HandlerUsers");
 
 
 const {validateUser} =require('../validadores/validaciones')
@@ -15,6 +15,8 @@ const {validateUser} =require('../validadores/validaciones')
  router.put("/editat-users", modificarUsurarios);
  
  router.delete("/eliminar-users/:id", deleteUser);
+
+ router.get("/verify", VerifyToken);
  
 
 

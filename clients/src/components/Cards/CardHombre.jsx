@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { allHombre } from "@/util/http";
 import { Button } from "@nextui-org/react";
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
+
 
 export default function CardHombre() {
   const dispatch = useDispatch();
   const infoHombre = useSelector((state) => state.storeShopping.dataHombre);
   console.log(infoHombre);
+  const router = useRouter()
+
 
   useEffect(() => {
     dispatch(allHombre());
@@ -21,9 +25,8 @@ export default function CardHombre() {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           SHOPPING QHPHA P`ACHA
         </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {infoHombre.map((product) => (
+        {infoHombre === 'NO SE ENCONTRO TOKEN' ?  router.push('/login') : <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {infoHombre?.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
@@ -56,7 +59,8 @@ export default function CardHombre() {
               </Link> 
             </div>
           ))}
-        </div>
+        </div>}
+       
       </div>
     </div>
   );

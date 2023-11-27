@@ -15,14 +15,21 @@ import {
   DropdownMenu,
   Avatar,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Menu(props) {
   const { singUp, user, isAutorisado,cargarUsuarioDesdeLocalStorage } = useTheme();
   console.log(user)
   const [userInfo, setUserInfo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const router = useRouter()
+
   const counter =useSelector((state)=>state.storeShopping.todalProductos)
   console.log(counter)
+
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
@@ -106,6 +113,7 @@ export default function Menu(props) {
 
                     <DropdownItem key="logout" color="danger" onClick={()=>{
                       singUp()
+                      router.push('/')
                     }}>
                       Log Out
                     </DropdownItem>

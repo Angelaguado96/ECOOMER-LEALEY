@@ -1,6 +1,8 @@
 const { Usuarios } = require("../DB");
 const {encrypt} = require('../utils/handlerPassword')
 const { tokenSing } = require("../utils/handlerJwt");
+const {verificarToken} = require('../utils/handlerJwt')
+
 
 const getUsers = async () => {
     const  data = await  Usuarios.findAll()
@@ -54,7 +56,19 @@ const deleteUsers = async ( id ) => {
     return "elimado con exito";
   }
 
+const  getVerify = async (req, res)=>{
+  
+ const {token}= req.cookies
+ console.log(token)
+ if(!token){
+  res.status(404).send(({message: "NO ESETAS AUTORIZADO"}))
+  return;
+ }
+ return  verificarToken(token,req)
+  
+  
+  
+}
 
 
-
-module.exports = { getUsers, postUsers, deleteUsers };
+module.exports = { getUsers, postUsers, deleteUsers ,getVerify};

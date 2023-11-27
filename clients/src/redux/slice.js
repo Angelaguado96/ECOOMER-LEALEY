@@ -42,7 +42,12 @@ export const storelSlice = createSlice({
       state.dataGrils = action.payload;
     },
     addProductosToCart :(state,action)=>{
+
+      console.log("soy action ",action.payload);
+      state.listaProductos = action.payload
+
       state.listaProductos =[...state.listaProductos,action.payload]
+
       state.todalProductos+=1
     }
 

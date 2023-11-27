@@ -116,7 +116,7 @@ const LadigProduct = () => {
             <p className="text-black text-tiny">No te quedes con las ganas ..</p>
             <p className="text-black text-tiny">Get notified.</p>
           </div>
-            <Link href='/store/storeGrils' > 
+            <Link href='/store/storeGrils' prefetch > 
           <Button className="text-tiny" color="primary" radius="full" size="sm">
             ver Tienda
           </Button>
