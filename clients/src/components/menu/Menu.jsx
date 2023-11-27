@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Navbar, NavbarBrand, NavbarContent, Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
+import {useSelector}from 'react-redux'
 import QuinesSomos from "./QuinesSomos";
 import Tema from "./Tema";
 import { useState,useEffect } from "react";
@@ -23,7 +24,11 @@ export default function Menu(props) {
   console.log(user)
   const [userInfo, setUserInfo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const router = useRouter()
+
+  const counter =useSelector((state)=>state.storeShopping.todalProductos)
+  console.log(counter)
 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -39,27 +44,36 @@ export default function Menu(props) {
           <h1>LOGO</h1>
       </NavbarContent>
       <div className="md:flex h-25 p-4 items-center">
-        <div className="flex flex-col md:flex-row md:mx-20">
+        <div className="flex flex-col items-center md:flex-row md:mx-20">
+          <div className="my-1 rounded rounded-[1em] text-sm p-2 bg-Dangers text-gray-900 font-medium hover:text-indigo-500 md:mx-2 md:my-0">
           <Link
-            href="/"
-            className="my-1 text-sm text-gray-900 font-medium hover:text-indigo-500 md:mx-2 md:my-0"
+            href="/" 
+            prefetch
           >
-            <Button color="danger">Inicio</Button>
+        
+          Inicio
+       
           </Link>
+          </div>
 
           <QuinesSomos></QuinesSomos>
+          <div  className="my-1 rounded rounded-[1em] text-sm text-gray-700 p-2 bg-Dangers font-medium hover:text-indigo-500 md:mx-2 md:my-0"> 
           <Link
             href=""
-            className="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-2 md:my-0"
+            prefetch
           >
-            <Button color="danger"> Pedido por Mayor</Button>
+     Pedido por Mayor
           </Link>
+          </div>
 
       <div className="items-center" >
             {isAutorisado ? (
               <div className="md:flex  p-2 items-center ">
+         {/*  compras */}
+                <p>{counter}</p>
 
                 <div  className="w-15 h-15  mr-2 rounded-full bg-pink-500 hover:bg-pink-600 transition duration-300 ease-in-out flex items-center justify-center">
+                 <Link href={'/DetailPurchased'} prefetch>    
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="4em"
@@ -70,6 +84,7 @@ export default function Menu(props) {
                   >
                     <path d="M236 69.4a16.13 16.13 0 0 0-12.08-5.4H176a48 48 0 0 0-96 0H32.08a16.13 16.13 0 0 0-12 5.4a16 16 0 0 0-3.92 12.48l14.26 120a16 16 0 0 0 16 14.12h163.25a16 16 0 0 0 16-14.12l14.26-120A16 16 0 0 0 236 69.4ZM96 104a8 8 0 0 1-16 0V88a8 8 0 0 1 16 0Zm32-72a32 32 0 0 1 32 32H96a32 32 0 0 1 32-32Zm48 72a8 8 0 0 1-16 0V88a8 8 0 0 1 16 0Z" />
                   </svg>
+                 </Link>
                 </div>
                 <Dropdown placement="bottom-end">
                   <DropdownTrigger>
@@ -110,6 +125,7 @@ export default function Menu(props) {
                 <Link
                   href="/login"
                   className="text-sm text-gray-700 font-medium hover:text-indigo-500  md:my-0"
+                  prefetch
                 >
                   <Button color="danger">login</Button>
                 </Link>
