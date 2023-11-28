@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { allGils } from "@/util/http";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
+
+
+
 
 export default function CardGrill() {
   const dispatch = useDispatch();
@@ -27,7 +31,7 @@ export default function CardGrill() {
               <div key={product.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
-                    src={product.imagen.secure_url}
+                    src={product.imagen?.secure_url}
                     alt={product.imageAlt}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
@@ -50,9 +54,11 @@ export default function CardGrill() {
                   </p>
                 </div>
                 <div className="h-5 w-20">
+                  <Link href={`/detalles/${product.id}`}> 
                   <Button className="h-6 w-15" color="danger">
                     Detalle
                   </Button>
+                  </Link>
                 </div>
               </div>
             ))}

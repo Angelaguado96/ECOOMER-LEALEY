@@ -1,7 +1,7 @@
 
 
  const handlerError =(res,error ,errorRaw)=>{
-   console.log(error)
+   console.log(errorRaw)
    const errorDetail={
        message:error.message,
        stack:error.stack

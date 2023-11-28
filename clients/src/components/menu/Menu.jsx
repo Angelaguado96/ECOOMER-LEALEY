@@ -92,6 +92,7 @@ export default function Menu(props) {
                   >
                     <DropdownItem key="profile" className="h-14 m-1 gap-2">
                     <h3><b>Bienvenidos a Lealey</b></h3>
+                    <a href="/misProductos">Mis productos</a>
                       <p>Nombre: {user.nombre} </p>
                       <p>Correo: {user.correo} </p>
                     </DropdownItem>

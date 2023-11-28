@@ -1,6 +1,6 @@
 
  "use client"
- import { setCarrusel ,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils} from "@/src/redux/slice";
+ import { setCarrusel ,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,setMyProduct} from "@/src/redux/slice";
  import axios from "../src/api/axios";
  import { toast } from "react-hot-toast";
 
@@ -104,6 +104,16 @@ export const allCarrucel = () => async (dispatch) => {
           const  {data} = await  axios.get ('/girls/todos-girls')
           console.log(data)
            dispatch (setGrils(data))
+       } catch (error) {
+          console.error ({error: error.message})
+       }
+
+    }
+    export const myProducts = (userId)=> async (dispatch)=>{
+
+       try {
+          const  {data} = await  axios.get (`/users/pedir-todoUser/${userId}`)
+           dispatch (setMyProduct(data))
        } catch (error) {
           console.error ({error: error.message})
        }

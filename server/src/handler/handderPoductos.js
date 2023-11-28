@@ -26,6 +26,7 @@ const postProducto = async (req, res) => {
   try {
     res.status(200).json( await crearProductos(req));
   } catch (error) {
+    console.log(error)
     handlerError(res,"ERROR EN POST  PRODUCTO",error);
   }
 };

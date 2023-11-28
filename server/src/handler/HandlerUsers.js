@@ -4,6 +4,7 @@ const {
   putUSers,
   deleteUsers,
   getVerify,
+  getUsersOne
 } = require("../controllers/ControlerUsers");
 const { handlerError } = require("../utils/handlerError");
 
@@ -20,6 +21,14 @@ const perdiUsuario = async (req, res) => {
     res.status(200).json(await getUsers(req));
   } catch (error) {
     handlerError(res, "ERROR EN GET USER", error);
+  }
+};
+
+const getOneUsuario = async (req, res) => {
+  try {
+    res.status(200).json(await getUsersOne(req,res));
+  } catch (error) {
+    handlerError(res, "ERROR EN GET-ONE USER", error);
   }
 };
 //
@@ -62,4 +71,5 @@ module.exports = {
   modificarUsurarios,
   deleteUser,
   VerifyToken,
+  getOneUsuario
 };

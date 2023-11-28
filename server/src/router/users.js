@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const {perdiUsuario,crearUsuarios,modificarUsurarios,deleteUser,VerifyToken} = require("../handler/HandlerUsers");
+const {perdiUsuario,crearUsuarios,modificarUsurarios,deleteUser,VerifyToken,getOneUsuario} = require("../handler/HandlerUsers");
 
 
 const {validateUser} =require('../validadores/validaciones')
@@ -9,6 +9,8 @@ const {validateUser} =require('../validadores/validaciones')
 
  
  router.get("/pedir-todoUser", perdiUsuario);
+ 
+ router.get("/pedir-todoUser/:id", getOneUsuario);
 
  router.post("/crear-users",validateUser,crearUsuarios);
 
