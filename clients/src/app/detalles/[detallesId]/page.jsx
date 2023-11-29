@@ -16,9 +16,14 @@ const Datelles = ({ params }) => {
   const dispatch = useDispatch();
 
   const info = useSelector((state) => state.storeShopping.dataOneProductos);
+
  
 
    
+
+   const lista = useSelector((state)=> state.storeShopping.listaProductos)
+   console.log(lista)
+
 
 
   useEffect(() => {
@@ -26,12 +31,18 @@ const Datelles = ({ params }) => {
   }, [dispatch]);
 
 
+
   const  handlerProducto= async(infom)=>{
     console.log("soy  infomacion de prt",infom)
+
+  const  handlerProducto=(infom)=>{
+      console.log(infom)
+
    dispatch(addProductosToCart(infom))
 
   }
-
+//  const fun = handlerProducto(info) 
+ console.log(addProductosToCart(info))
   return (
     <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
       <div className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
@@ -186,13 +197,21 @@ const Datelles = ({ params }) => {
                   <div> 
 
                   <Button
-                    type="submit"
+       type="submit"
                          onChange={()=> {handlerProducto(info)}}
                     className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-whitefocus:outline-none "
                     color="danger"
                   >
                     Add to bag
                   </Button>
+
+  onClick={() => handlerProducto(info)}
+  className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-white focus:outline-none "
+  color="danger"
+>
+  Add to bag {info.nombre}
+</Button>
+
                   </div>
                 
                 </form>

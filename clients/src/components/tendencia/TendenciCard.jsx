@@ -32,7 +32,7 @@ const TendenciCard = () => {
          
         >
           <CardBody className="overflow-visible p-0">
-            <Link href={`detalles/${item.id}`}>   
+            <Link href={`detalles/${item.id}`} prefetch>   
             <Image
               shadow="sm"
               radius="lg"
