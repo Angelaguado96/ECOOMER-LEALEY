@@ -3,7 +3,7 @@ const { encrypt, compare } = require("../utils/handlerPassword");
 const { tokenSing } = require("../utils/handlerJwt");
 
 
-
+//
 
 const postLogin = async (req,res) => {
   const { correo, contraseña } = req.body;
