@@ -22,7 +22,7 @@ export default function Menu(props) {
   const [userInfo, setUserInfo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const counter =useSelector((state)=>state.storeShopping.todalProductos)
-  console.log(counter)
+ 
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
@@ -38,24 +38,24 @@ export default function Menu(props) {
       </NavbarContent>
       <div className="md:flex h-25 p-4 items-center">
         <div className="flex flex-col items-center md:flex-row md:mx-20">
-          <div className="my-1 rounded rounded-[1em] text-sm p-2 bg-Dangers text-gray-900 font-medium hover:text-indigo-500 md:mx-2 md:my-0">
           <Link
             href="/" 
             prefetch
           >
+          <div className="my-1 rounded rounded-[1em] text-sm p-2 bg-Dangers text-gray-900 font-medium hover: md:mx-2 md:my-0">
           Inicio
-          </Link>
           </div>
+          </Link>
 
           <QuinesSomos></QuinesSomos>
-          <div  className="my-1 rounded rounded-[1em] text-sm text-gray-700 p-2 bg-Dangers font-medium hover:text-indigo-500 md:mx-2 md:my-0"> 
           <Link
             href=""
             prefetch
           >
+          <div  className="my-1 rounded rounded-[1em] text-sm text-gray-700 p-2 bg-Dangers font-medium hover: md:mx-2 md:my-0"> 
      Pedido por Mayor
-          </Link>
           </div>
+          </Link>
 
       <div className="items-center" >
             {isAutorisado ? (

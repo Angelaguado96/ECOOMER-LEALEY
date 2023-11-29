@@ -16,8 +16,8 @@ const Datelles = ({ params }) => {
   const dispatch = useDispatch();
 
   const info = useSelector((state) => state.storeShopping.dataOneProductos);
-   const lista = useSelector((state)=> state.storeShopping.listaProductos)
-   console.log(lista)
+
+ 
 
 
   useEffect(() => {
