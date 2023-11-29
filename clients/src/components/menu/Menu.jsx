@@ -15,14 +15,21 @@ import {
   DropdownMenu,
   Avatar,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+
+
 
 export default function Menu(props) {
   const { singUp, user, isAutorisado,cargarUsuarioDesdeLocalStorage } = useTheme();
   console.log(user)
   const [userInfo, setUserInfo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const router = useRouter()
+
   const counter =useSelector((state)=>state.storeShopping.todalProductos)
- 
+  console.log(counter)
+
   const handleMenuToggle = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
@@ -98,12 +105,14 @@ export default function Menu(props) {
                   >
                     <DropdownItem key="profile" className="h-14 m-1 gap-2">
                     <h3><b>Bienvenidos a Lealey</b></h3>
+                    <a href="/misProductos">Mis productos</a>
                       <p>Nombre: {user.nombre} </p>
                       <p>Correo: {user.correo} </p>
                     </DropdownItem>
 
                     <DropdownItem key="logout" color="danger" onClick={()=>{
                       singUp()
+                      router.push('/')
                     }}>
                       Log Out
                     </DropdownItem>
@@ -111,15 +120,14 @@ export default function Menu(props) {
                 </Dropdown>
               </div>
             ) : (
-              <div  className="md:flex  items-center" >
                 <Link
                   href="/login"
-                  className="text-sm text-gray-700 font-medium hover:text-indigo-500  md:my-0"
                   prefetch
                 >
-                  <Button color="danger">login</Button>
-                </Link>
+              <div  className="my-1 rounded rounded-[1em] text-sm text-gray-700 p-2 bg-Dangers font-medium hover: md:mx-2 md:my-0" >
+                 login
               </div>
+                </Link>
             )}
        </div>
           <span className="icon-[material-symbols--shopping-bag]"></span>

@@ -1,6 +1,7 @@
 const { Productos } = require("../DB");
 
-const getHombre = async () => {
+const getHombre = async (req) => {
+
   const addMen = await Productos.findAll({
     where: {
       categoria: "hombre",

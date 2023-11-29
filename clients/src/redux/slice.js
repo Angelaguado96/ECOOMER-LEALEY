@@ -14,7 +14,8 @@ export const storelSlice = createSlice({
     dataGrils:[],
     dataChildren:[],
     todalProductos:0,
-   listaProductos:[]
+   listaProductos:[],
+   historyProduct:[],
   },
   reducers: {
     setCarrusel: (state, action) => {
@@ -42,10 +43,15 @@ export const storelSlice = createSlice({
       state.dataGrils = action.payload;
     },
     addProductosToCart :(state,action)=>{
-      state.listaProductos =[...state.listaProductos,action.payload]
-      state.todalProductos+=1
-    }
 
+      state.listaProductos =[...state.listaProductos,action.payload]
+
+      state.todalProductos+=1
+    },
+    setMyProduct:(state,action)=>{
+      state.historyProduct= action.payload;
+    },
+     
   },
 });
 // console.log([...state.listaProductos,...action.payload])
