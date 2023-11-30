@@ -54,7 +54,7 @@ export default function CardGrill() {
                   </p>
                 </div>
                 <div className="h-5 w-20">
-                  <Link href={`/detalles/${product.id}`}> 
+                  <Link href={`/detalles/${product.id}`} prefetch> 
                   <Button className="h-6 w-15" color="danger">
                     Detalle
                   </Button>

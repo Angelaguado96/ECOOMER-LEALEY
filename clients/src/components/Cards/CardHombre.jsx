@@ -52,7 +52,7 @@ export default function CardHombre() {
               </div>
               <div className="h-5 w-20">
               </div>
-              <Link href={`/detalles/${product.id}`}>
+              <Link href={`/detalles/${product.id}`} prefetch>
               <Button className="h-6 w-15" color="danger">
                   Detalle
                 </Button>

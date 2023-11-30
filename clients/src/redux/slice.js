@@ -51,11 +51,15 @@ export const storelSlice = createSlice({
     setMyProduct:(state,action)=>{
       state.historyProduct= action.payload;
     },
-     
+     removeProductCart:(state,action)=>{
+     const productIdToRemove = action.payload; 
+  state.listaProductos = state.listaProductos.filter(p => p.id !== productIdToRemove);
+  state.todalProductos -= 1;
+     }
   },
 });
 // console.log([...state.listaProductos,...action.payload])
-export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart} = storelSlice.actions;
+export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,removeProductCart} = storelSlice.actions;
 export default storelSlice.reducer;
 
 
