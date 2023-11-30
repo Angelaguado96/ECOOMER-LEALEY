@@ -49,7 +49,7 @@ export const storelSlice = createSlice({
       state.todalProductos+=1
     },
     setMyProduct:(state,action)=>{
-      state.historyProduct= action.payload;
+      state.historyProduct= [action.payload];
     },
      removeProductCart:(state,action)=>{
      const productIdToRemove = action.payload; 
@@ -58,8 +58,8 @@ export const storelSlice = createSlice({
      }
   },
 });
-// console.log([...state.listaProductos,...action.payload])
-export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,removeProductCart} = storelSlice.actions;
+
+export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,setMyProduct,removeProductCart} = storelSlice.actions;
 export default storelSlice.reducer;
 
 

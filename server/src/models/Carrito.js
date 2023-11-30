@@ -15,11 +15,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      descripcion: {
-         // descripcion del producto 
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       tipo: {
           //  pantalon , polo , chompa Etc
         type: DataTypes.STRING,
@@ -28,13 +23,6 @@ module.exports = (sequelize) => {
       imagen: {
         type: DataTypes.JSONB,
         allowNull: true,
-        
-      },
-      marca: {
-         //  la marca de  empresa
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue:"QHAPAQ P`ACHA"
       },
       categoria: {
         type: DataTypes.STRING,
@@ -53,26 +41,16 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      tendencia: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        validate: {
-          isIn: {
-            args: [["true", "false"]],
-            msg:"el campo solo puede  terner  true o flase"
-          },
-        },
-      },
       colores:{
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       tallaAdulto:{
-        type: DataTypes.ARRAY(DataTypes.STRING),
+         type: DataTypes.STRING,
         allowNull: true,
       },
       tallaKit:{
-        type: DataTypes.ARRAY(DataTypes.STRING),
+         type: DataTypes.STRING,
         allowNull: true, 
       }
     },

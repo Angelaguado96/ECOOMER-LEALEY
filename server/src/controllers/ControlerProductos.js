@@ -25,9 +25,12 @@ const crearProductos = async (req) => {
     precio,
     tendencia,
     imagen,
+    tallaAdulto,
+    tallaKit,
+    colores
   } = req.body;
 
-
+ console.log("dara" ,req.body)
   const creandoProducto = await Productos.create({
     nombre,
     descripcion,
@@ -37,12 +40,15 @@ const crearProductos = async (req) => {
     precio,
     tendencia,
     imagen,
+    tallaAdulto,
+    tallaKit,
+    colores
   });
 
   //  relacion el producto con el ususaio
  
     const  usuario = await Usuarios.findByPk(usuarioId) 
-    console.log("yoooo",usuario)
+    
   if (usuario){
      await   usuario.addProducto(creandoProducto)
   }
