@@ -51,11 +51,15 @@ export const storelSlice = createSlice({
     setMyProduct:(state,action)=>{
       state.historyProduct= [action.payload];
     },
-     removeProductCart:(state,action)=>{
-     const productIdToRemove = action.payload; 
-  state.listaProductos = state.listaProductos.filter(p => p.id !== productIdToRemove);
-  state.todalProductos -= 1;
-     }
+    removeProductCart: (state, action) => {
+      const productToRemove = action.payload;
+      state.listaProductos = state.listaProductos.filter((p) =>
+        p.colores !== productToRemove.colores &&
+        ((p.tallaAdulto && p.tallaAdulto !== productToRemove.tallaAdulto) ||
+          (p.tallaKit && p.tallaKit !== productToRemove.tallaKit))
+      );
+      state.todalProductos -= 1;
+    }
   },
 });
 

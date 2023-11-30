@@ -8,9 +8,12 @@ const DetailPurchased = () => {
   const dispatch=useDispatch()
   const Purchased = useSelector((state)=>state.storeShopping.listaProductos)
   console.log(Purchased)
-  const handlerRemove= (id)=>{
-   dispatch(removeProductCart(id))
-  }
+ 
+  const handlerRemove = (productToRemove) => {
+    dispatch(removeProductCart(productToRemove));
+  };
+
+  
   const calcularTotal = () => {
     const totalPrecio = Purchased.reduce((total, producto) => {
       const precioNumerico = parseFloat(producto.precio);
@@ -35,7 +38,18 @@ const DetailPurchased = () => {
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2">{P?.nombre}</div>
               <p className="text-gray-700 text-base">${P?.precio}</p>
-              <Button onClick={()=>handlerRemove(P.id)}>
+              <p>Category:{P.categoria}</p>
+              <p className=' flex items-center'>Color:<span style={{padding:'0.2em', width: '2em',
+                              height: '2em', // Agregado para que también tenga altura
+                              borderRadius: '50%', // Hace que sea un círculo perfecto
+                              backgroundColor: `${P?.colores}`,
+                              marginLeft:'2px',
+                              color:'transparent',
+                               fontSize:'0.5em'}}>p</span></p>
+                               <p className='flex items-center'>
+                               Size:{P?.tallaAdulto ? <p>{P.tallaAdulto}</p>: <p>{P.tallaKit}</p> }
+                               </p>
+              <Button onClick={()=>handlerRemove(P)}>
                   Remove
               </Button>
             </div>

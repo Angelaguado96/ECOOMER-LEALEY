@@ -39,7 +39,7 @@ const TendenciCard = () => {
               width="100%"
               alt='iamgen'
               className="w-full object-cover h-[140px]"
-              src={item.imagen.secure_url}
+              src={item?.imagen?.secure_url}
             />
             </Link> 
           </CardBody>
