@@ -51,11 +51,11 @@ export default function CardMujer() {
                   </p>
                 </div>
                 <div className="h-5 w-20"></div>
-                <Link href={`/detalles/${product.id}`} prefetch>
                   <Button className="h-6 w-15" color="danger">
+                <Link href={`/detalles/${product.id}`} prefetch>
                     Detalle
-                  </Button>
                 </Link>
+                  </Button>
               </div>
             ))}
           </div>

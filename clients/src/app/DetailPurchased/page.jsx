@@ -25,7 +25,7 @@ const DetailPurchased = () => {
     <div >
       <div className=' w-full flex justify-evenly'>    
         {Purchased?.length === 0? <div>
-          <p>NO hay Productos</p>
+          <p>No hay Productos</p>
         </div>:
        
         <div className=''>
@@ -40,8 +40,8 @@ const DetailPurchased = () => {
               <p className="text-gray-700 text-base">${P?.precio}</p>
               <p>Category:{P.categoria}</p>
               <p className=' flex items-center'>Color:<span style={{padding:'0.2em', width: '2em',
-                              height: '2em', // Agregado para que también tenga altura
-                              borderRadius: '50%', // Hace que sea un círculo perfecto
+                              height: '2em', 
+                              borderRadius: '50%', 
                               backgroundColor: `${P?.colores}`,
                               marginLeft:'2px',
                               color:'transparent',

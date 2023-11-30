@@ -32,10 +32,12 @@ const LadigProduct = () => {
             <p className="text-black text-tiny">No te quedes con las ganas ..</p>
             <p className="text-black text-tiny">Get notified.</p>
           </div>
-           <Link href='/store/storeHombre'> 
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            ver Tienda
-          </Button>
+           <Link href='/store/storeHombre' prefetch> 
+          <div className="text-tiny text-white p-1  bg-blue-600 rounded-[1em]" >
+           <p className="flex text-center">
+           ver Tienda
+            </p> 
+          </div>
           </Link>
         </CardFooter>
       </Card>
@@ -61,9 +63,11 @@ const LadigProduct = () => {
             <p className="text-black text-tiny">Get notified.</p>
           </div>
            <Link href='/store/storeMujer'> 
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            ver Tienda
-          </Button>
+           <div className="text-tiny text-white p-1  bg-blue-600 rounded-[1em]" >
+           <p className="flex text-center">
+           ver Tienda
+            </p> 
+          </div>
           </Link>
         </CardFooter>
       </Card>
@@ -89,9 +93,11 @@ const LadigProduct = () => {
             <p className="text-black text-tiny">Get notified.</p>
           </div>
           <Link href='/store/storeChildren'>
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            ver Tienda
-          </Button>
+          <div className="text-tiny text-white p-1  bg-blue-600 rounded-[1em]" >
+           <p className="flex text-center">
+           ver Tienda
+            </p> 
+          </div>
           </Link>
         </CardFooter>
       </Card>
@@ -117,9 +123,11 @@ const LadigProduct = () => {
             <p className="text-black text-tiny">Get notified.</p>
           </div>
             <Link href='/store/storeGrils' prefetch > 
-          <Button className="text-tiny" color="primary" radius="full" size="sm">
-            ver Tienda
-          </Button>
+            <div className="text-tiny text-white p-1  bg-blue-600 rounded-[1em]" >
+           <p className="flex text-center">
+           ver Tienda
+            </p> 
+          </div>
           </Link>
         </CardFooter>
       </Card>
