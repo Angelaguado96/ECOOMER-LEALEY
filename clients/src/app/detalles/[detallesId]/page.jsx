@@ -3,10 +3,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productosOne } from "@/util/http";
 import { useEffect,useState } from "react";
-import { Button } from "@nextui-org/react";
+import { Button} from "@nextui-org/react";
 import Validate from "@/util/ValidateProduct";
 import { addProductosToCart } from "@/src/redux/slice";
 import { toast } from "react-hot-toast";
+import AddCart from "@/src/components/modal/AddCart";
 
 
 
@@ -15,7 +16,7 @@ import { toast } from "react-hot-toast";
 const Datelles = ({ params }) => {
   
   const dispatch = useDispatch();
-  
+  const [showModal, setShowModal] = useState(false);
     useEffect(() => {
       dispatch(productosOne(params.detallesId));
     }, [dispatch]);
@@ -60,10 +61,17 @@ const handlerTallaK=(talla)=>{
  }
 
    const  handlerProducto=(infom)=>{
-      console.log(infom)
    dispatch(addProductosToCart(infom))
+  
+   toast.success("Añadido a la bolsa con éxito");
   }
-
+  const ShowSuccessModal =()=>{
+   setShowModal(true)
+  }
+  const CloseModal=()=>{
+   setShowModal(false)
+  }
+  
   useEffect(() => {
     if (info) {
       setdatos((prevDatos) => ({
@@ -77,7 +85,7 @@ const handlerTallaK=(talla)=>{
       }));
     }
   }, [info]);
-//  console.log(error)
+
   return (
     <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
       <div className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
@@ -140,13 +148,14 @@ const handlerTallaK=(talla)=>{
               height: "2em",
               borderRadius: "50%",
               backgroundColor: `${c}`,
+              border:'solid gray 1px'
             }}
           ></button>
         );
       })}
-      {error.colores && <span>{error.colores}</span>}
     </div>
   </fieldset>
+      {error.colores && <span>{error.colores}</span>}
 </div>
 
                   <div className="mt-10">
@@ -169,7 +178,6 @@ const handlerTallaK=(talla)=>{
                             
                             )
                           })}
-                          {error.tallaAdulto && (<spam>{error.tallaAdulto}</spam>) }
                        </div>:
                        <div className="flex justify-around items-center w-full">
                         { info?.tallaKit?.map((t)=>{
@@ -179,13 +187,16 @@ const handlerTallaK=(talla)=>{
                                 {t}
                                </Button>
                            
-                          )
-                        })}
-                        {error.tallaKit && (<spam>{error.tallaKit}</spam>) }
+                           )
+                          })}
                        </div>
                        }
                       </div>
                     </fieldset>
+                    <div>
+                    {error.Talla && (<spam>{error.Talla}</spam>) }
+                       
+                    </div>
                   </div>
                   <div>
                   <Button
@@ -196,7 +207,7 @@ const handlerTallaK=(talla)=>{
     toast.error("Por favor, seleccione un color");
   } else {
     handlerProducto(datos);
-    toast.success("Añadido a la bolsa con éxito");
+    ShowSuccessModal();
   }
 }}
   className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-white focus:outline-none "
@@ -204,15 +215,16 @@ const handlerTallaK=(talla)=>{
 >
   Add to bag {info.nombre}
 </Button>
-        
+
       </div>
-                
+  
                 </form>
               </section>
             </div>
           </div>
         </div>
       </div>
+{showModal && <AddCart onClose={CloseModal}/>}
     </div>
   );
 };

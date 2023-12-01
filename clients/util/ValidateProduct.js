@@ -1,14 +1,18 @@
 const Validate =(datos)=>{
     let errores={}
-    if(datos.colores === ''){
- errores.colores='Choose a color, please'
+    if(datos.colores === '') {
+     errores.colores='Por favor, añada un color para la prenda'
     }
-    if(datos.tallaAdulto === '' ){
-       errores.tallaAdulto = 'Choose a size, please'
-    }
-    if (datos.tallaKit==='') {
-        errores.tallaKit='Choose a size, please'
-    }
+    if (datos.tallaAdulto === '' && datos.tallaKit === '') {
+        errores.Talla = 'Por favor, añada su talla';
+       
+      } else {
+        errores.Talla = '';
+      
+      }
+      
+   
+    
     return errores
 }
 export default Validate
