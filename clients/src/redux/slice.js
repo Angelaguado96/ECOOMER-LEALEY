@@ -45,9 +45,6 @@ export const storelSlice = createSlice({
     },
     addProductosToCart :(state,action)=>{
 
-      console.log("soy action ",action.payload);
-      state.listaProductos = action.payload
-
       state.listaProductos =[...state.listaProductos,action.payload]
 
       state.todalProductos+=1
@@ -58,12 +55,20 @@ export const storelSlice = createSlice({
     setCommentary:(state,action)=>{
       state.allComentarios= action.payload;
     },
-
+    removeProductCart: (state, action) => {
+      const productToRemove = action.payload;
+      state.listaProductos = state.listaProductos.filter((p) =>
+        p.colores !== productToRemove.colores &&
+        ((p.tallaAdulto && p.tallaAdulto !== productToRemove.tallaAdulto) ||
+          (p.tallaKit && p.tallaKit !== productToRemove.tallaKit))
+      );
+      state.todalProductos -= 1;
+    }
   },
 });
 
-export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,setMyProduct,setCommentary} = storelSlice.actions;
-export default storelSlice.reducer;
+export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,setMyProduct,setCommentary,removeProductCart} = storelSlice.actions;
+
 
 
 

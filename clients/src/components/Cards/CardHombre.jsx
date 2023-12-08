@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 export default function CardHombre() {
   const dispatch = useDispatch();
-  const infoHombre = useSelector((state) => state.storeShopping.dataHombre);
+  const infoHombre = useSelector((state) => state.storeShopping?.dataHombre);
   console.log(infoHombre);
   const router = useRouter()
 
@@ -30,8 +30,8 @@ export default function CardHombre() {
             <div key={product.id} className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
-                  src={product.imagen.secure_url}
-                  alt={product.imagen.secure_url}
+                  src={product?.imagen?.secure_url}
+                  alt={product?.imagen?.secure_url}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
@@ -52,11 +52,11 @@ export default function CardHombre() {
               </div>
               <div className="h-5 w-20">
               </div>
-              <Link href={`/detalles/${product.id}`}>
-              <Button className="h-6 w-15" color="danger">
+              <Button className="h-6 w-15 bg-Dangers" >
+              <Link href={`/detalles/${product.id}`} prefetch>
                   Detalle
-                </Button>
               </Link> 
+                </Button>
             </div>
           ))}
         </div>}

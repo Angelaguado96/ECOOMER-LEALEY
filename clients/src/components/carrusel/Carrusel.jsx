@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Carrusel = () => {
   const info = useSelector((state) => state.storeShopping);
 
-  const general = info.dataCarrusel.filter(
+  const general = info?.dataCarrusel.filter(
     (item) => item.categoria === "general"
   );
 

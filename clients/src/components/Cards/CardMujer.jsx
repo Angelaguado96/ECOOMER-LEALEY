@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function CardMujer() {
   const dispatch = useDispatch();
-  const infoMujer = useSelector((state) => state.storeShopping.dataMujer);
+  const infoMujer = useSelector((state) => state.storeShopping?.dataMujer);
   console.log(infoMujer);
   const router = useRouter();
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function CardMujer() {
           router.push("/login")
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {infoMujer.map((product) => (
+            {infoMujer?.map((product) => (
               <div key={product.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
@@ -51,11 +51,11 @@ export default function CardMujer() {
                   </p>
                 </div>
                 <div className="h-5 w-20"></div>
-                <Link href={`/detalles/${product.id}`}>
                   <Button className="h-6 w-15" color="danger">
+                <Link href={`/detalles/${product.id}`} prefetch>
                     Detalle
-                  </Button>
                 </Link>
+                  </Button>
               </div>
             ))}
           </div>

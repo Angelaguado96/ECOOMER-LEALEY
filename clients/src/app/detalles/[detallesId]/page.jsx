@@ -2,10 +2,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productosOne } from "@/util/http";
-import { useEffect } from "react";
-import { Button } from "@nextui-org/react";
+import { useEffect,useState } from "react";
+import { Button} from "@nextui-org/react";
+import Validate from "@/util/ValidateProduct";
 import { addProductosToCart } from "@/src/redux/slice";
-
+import { toast } from "react-hot-toast";
+import AddCart from "@/src/components/modal/AddCart";
 
 
 
@@ -14,35 +16,76 @@ import { addProductosToCart } from "@/src/redux/slice";
 const Datelles = ({ params }) => {
   
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+    useEffect(() => {
+      dispatch(productosOne(params.detallesId));
+    }, [dispatch]);
 
   const info = useSelector((state) => state.storeShopping.dataOneProductos);
+ console.log(info)
+ const [error,seterror]=useState({})
+ const [datos,setdatos]=useState({
+  id:'',
+  nombre:'',
+   tipo:'',
+   imagen:'',
+   categoria:'',
+   precio:'',
+   colores:'',
+   tallaAdulto:'',
+   tallaKit:''
+ })
+const handlerTallaA=(talla)=>{
+  setdatos((prevDatos)=>({
+    ...prevDatos,
+    tallaAdulto:talla
+  }))
+  seterror(Validate({...datos,
+  tallaAdulto:talla}))
+}
+const handlerTallaK=(talla)=>{
+  setdatos((prevDatos)=>({
+    ...prevDatos,
+    tallaKit:talla
+  }))
+  seterror(Validate({...datos,
+    tallaKit:talla}))
+}
 
- 
+ const handlerColor=(colores)=>{
+  setdatos((prevDatos)=>({
+    ...prevDatos,
+    colores:colores
+  }))
+  seterror(Validate({...datos,colores:colores}))
+ }
 
-   
-
-   const lista = useSelector((state)=> state.storeShopping.listaProductos)
-   console.log(lista)
-
-
-
-  useEffect(() => {
-    dispatch(productosOne(params.detallesId));
-  }, [dispatch]);
-
-
-
-  const  handlerProducto= async(infom)=>{
-    console.log("soy  infomacion de prt",infom)
-
-  const  handlerProducto=(infom)=>{
-      console.log(infom)
-
+   const  handlerProducto=(infom)=>{
    dispatch(addProductosToCart(infom))
-
+  
+   toast.success("Añadido a la bolsa con éxito");
   }
-//  const fun = handlerProducto(info) 
- console.log(addProductosToCart(info))
+  const ShowSuccessModal =()=>{
+   setShowModal(true)
+  }
+  const CloseModal=()=>{
+   setShowModal(false)
+  }
+  
+  useEffect(() => {
+    if (info) {
+      setdatos((prevDatos) => ({
+        ...prevDatos,
+        id: info.id || "",
+        nombre: info.nombre || "",
+        tipo: info.tipo || "",
+        imagen: info?.imagen?.secure_url || "",
+        categoria: info.categoria || "",
+        precio: info.precio || "",
+      }));
+    }
+  }, [info]);
+
   return (
     <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
       <div className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
@@ -51,7 +94,7 @@ const Datelles = ({ params }) => {
             <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
               {info.imagen && (
                 <img
-                  src={info.imagen.secure_url}
+                  src={info?.imagen?.secure_url}
                   alt="Two each of gray, white, and black shirts arranged on table."
                   className="object-cover object-center"
                 />
@@ -87,58 +130,33 @@ const Datelles = ({ params }) => {
 
               <section aria-labelledby="options-heading" className="mt-10">
                 <form>
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-900">Color</h4>
-
-                    <fieldset className="mt-4">
-                      <span className="flex items-center space-x-3">
-                        <label className="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                          <input
-                            type="radio"
-                            name="color-choice"
-                            value="White"
-                            className="sr-only"
-                            aria-labelledby="color-choice-0-label"
-                          />
-
-                          <span
-                            aria-hidden="true"
-                            className="h-8 w-8 bg-white rounded-full border border-black border-opacity-10"
-                          ></span>
-                        </label>
-
-                        <label className="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                          <input
-                            type="radio"
-                            name="color-choice"
-                            value="Gray"
-                            className="sr-only"
-                            aria-labelledby="color-choice-1-label"
-                          />
-
-                          <span
-                            aria-hidden="true"
-                            className="h-8 w-8 bg-gray-200 rounded-full border border-black border-opacity-10"
-                          ></span>
-                        </label>
-
-                        <label className="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-900">
-                          <input
-                            type="radio"
-                            name="color-choice"
-                            value="Black"
-                            className="sr-only"
-                            aria-labelledby="color-choice-2-label"
-                          />
-
-                          <span
-                            aria-hidden="true"
-                            className="h-8 w-8 bg-gray-900 rounded-full border border-black border-opacity-10"
-                          ></span>
-                        </label>
-                      </span>
-                    </fieldset>
-                  </div>
+                <div>
+  <h4 className="text-sm font-medium text-gray-900">Color</h4>
+  <fieldset className="mt-4">
+    <div>
+      {info?.colores?.map((c) => {
+        return (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handlerColor(c);
+            }}
+            style={{
+              marginLeft: "2px",
+              marginRight: "2px",
+              width: "2em",
+              height: "2em",
+              borderRadius: "50%",
+              backgroundColor: `${c}`,
+              border:'solid gray 1px'
+            }}
+          ></button>
+        );
+      })}
+    </div>
+  </fieldset>
+      {error.colores && <span>{error.colores}</span>}
+</div>
 
                   <div className="mt-10">
                     <div className="flex items-center justify-between">
@@ -149,77 +167,64 @@ const Datelles = ({ params }) => {
 
                     <fieldset className="mt-4">
                       <div className="grid grid-cols-4 gap-4">
-                        <label className="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 cursor-pointer bg-white text-gray-900 shadow-sm">
-                          <input
-                            type="radio"
-                            name="size-choice"
-                            value="S"
-                            className="sr-only"
-                            aria-labelledby="size-choice-2-label"
-                          />
-                          <span id="size-choice-2-label">S</span>
-
-                          <span
-                            className="pointer-events-none absolute -inset-px rounded-md"
-                            aria-hidden="true"
-                          ></span>
-                        </label>
-
-                        <label className="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 cursor-pointer bg-white text-gray-900 shadow-sm">
-                          <input
-                            type="radio"
-                            name="size-choice"
-                            value="M"
-                            className="sr-only"
-                            aria-labelledby="size-choice-3-label"
-                          />
-                          <span id="size-choice-3-label">M</span>
-
-                          <span
-                            className="pointer-events-none absolute -inset-px rounded-md"
-                            aria-hidden="true"
-                          ></span>
-                        </label>
-
-                        <label className="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 cursor-pointer bg-white text-gray-900 shadow-sm">
-                          <input
-                            type="radio"
-                            name="size-choice"
-                            value="L"
-                            className="sr-only"
-                            aria-labelledby="size-choice-4-label"
-                          />
-                          <span id="size-choice-4-label">L</span>
-                        </label>
+                       { info?.tallaAdulto?.length > 0 ? 
+                       <div className="flex justify-around items-center w-full">
+                      {   info?.tallaAdulto?.map((t)=>{
+                           return(
+                            
+                              <Button onClick={()=>handlerTallaA(t)}  className="p-4 shadow-2xl  mb-6 ml-1 mr-1 bg-gray-400 rounded-md">
+                               {t}
+                              </Button>
+                            
+                            )
+                          })}
+                       </div>:
+                       <div className="flex justify-around items-center w-full">
+                        { info?.tallaKit?.map((t)=>{
+                          return(
+          
+                               <Button onClick={()=>handlerTallaK(t)} className="p-4 shadow-2xl  mb-6 ml-1 mr-1 bg-gray-400 rounded-md">
+                                {t}
+                               </Button>
+                           
+                           )
+                          })}
+                       </div>
+                       }
                       </div>
                     </fieldset>
+                    <div>
+                    {error.Talla && (<spam>{error.Talla}</spam>) }
+                       
+                    </div>
                   </div>
-                  <div> 
-
+                  <div>
                   <Button
-       type="submit"
-                         onChange={()=> {handlerProducto(info)}}
-                    className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-whitefocus:outline-none "
-                    color="danger"
-                  >
-                    Add to bag
-                  </Button>
-
-  onClick={() => handlerProducto(info)}
+ onClick={() => {
+  if (!datos.tallaAdulto && !datos.tallaKit) {
+    toast.error("Por favor, seleccione una talla");
+  } else if (!datos.colores) {
+    toast.error("Por favor, seleccione un color");
+  } else {
+    handlerProducto(datos);
+    ShowSuccessModal();
+  }
+}}
   className="mt-6 flex w-full items-center justify-center rounded-md  py-3 text-base  text-white focus:outline-none "
   color="danger"
 >
   Add to bag {info.nombre}
 </Button>
 
-                  </div>
-                
+      </div>
+  
                 </form>
               </section>
             </div>
           </div>
         </div>
       </div>
+{showModal && <AddCart onClose={CloseModal}/>}
     </div>
   );
 };

@@ -12,7 +12,7 @@ const CarrucelPromociones = () => {
   
   const datos = useSelector((state) => state.storeShopping);
 
-  const promociones = datos.dataCarrusel.filter(
+  const promociones = datos?.dataCarrusel.filter(
     (item) => item.categoria === "promociones"
   );
 
