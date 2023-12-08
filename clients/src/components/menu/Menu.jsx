@@ -8,18 +8,15 @@ import QuinesSomos from "./QuinesSomos";
 import Tema from "./Tema";
 import { useState,useEffect } from "react";
 import { useTheme } from "@/src/components/context/AuthContext";
-import {
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
+import { DropdownItem,DropdownTrigger,Dropdown,DropdownMenu,Avatar,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 
 
+
 export default function Menu(props) {
+
   const { singUp, user, isAutorisado,cargarUsuarioDesdeLocalStorage } = useTheme();
   console.log(user)
   const [userInfo, setUserInfo] = useState(null);
@@ -38,6 +35,7 @@ export default function Menu(props) {
     cargarUsuarioDesdeLocalStorage();
   }, []);
  
+ 
   return (
     <Navbar className="" isBordered>
       <NavbarContent justify="start">
@@ -45,19 +43,16 @@ export default function Menu(props) {
       </NavbarContent>
       <div className="md:flex h-25 p-4 items-center">
         <div className="flex flex-col items-center md:flex-row md:mx-20">
-          <div className="my-1 rounded rounded-[1em] text-sm p-2 bg-Dangers text-gray-900 font-medium hover:text-indigo-500 md:mx-2 md:my-0">
+          <div className="my-1 rounded rounded-1em text-sm p-2 bg-Dangers text-gray-900 font-medium hover:text-indigo-500 md:mx-2 md:my-0">
           <Link
             href="/" 
             prefetch
           >
-        
           Inicio
-       
           </Link>
           </div>
-
           <QuinesSomos></QuinesSomos>
-          <div  className="my-1 rounded rounded-[1em] text-sm text-gray-700 p-2 bg-Dangers font-medium hover:text-indigo-500 md:mx-2 md:my-0"> 
+          <div  className="my-1 rounded rounded-1em text-sm text-gray-700 p-2 bg-Dangers font-medium hover:text-indigo-500 md:mx-2 md:my-0"> 
           <Link
             href=""
             prefetch
@@ -105,17 +100,17 @@ export default function Menu(props) {
                     isOpen={isMenuOpen}
                     onClick={handleMenuToggle}
                   >
-                    <DropdownItem key="profile" className="h-14 m-1 gap-2">
+                    <DropdownItem key="profile" className="h-20 m-1 gap-5">
                     <h3><b>Bienvenidos a Lealey</b></h3>
-                    <a href="/misProductos">Mis productos</a>
+                    <Link href="/misProductos">  <a className="hover:underline hover:text-blue-500">🛒 Mis productos</a> </Link>
                       <p>Nombre: {user.nombre} </p>
                       <p>Correo: {user.correo} </p>
                     </DropdownItem>
-
-                    <DropdownItem key="logout" color="danger" onClick={()=>{
-                      singUp()
+                    <DropdownItem key="logout" color="danger"
+                     onClick={()=>{
+                      singUp()  
                       router.push('/')
-                    }}>
+                     }}>
                       Log Out
                     </DropdownItem>
                   </DropdownMenu>

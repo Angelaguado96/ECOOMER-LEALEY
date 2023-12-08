@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Productos",
+    "Carrito",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -54,6 +54,6 @@ module.exports = (sequelize) => {
         allowNull: true, 
       }
     },
-    { timestamps: false }
+    { timestamps: true }
   );
 };

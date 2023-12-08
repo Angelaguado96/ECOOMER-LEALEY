@@ -1,30 +1,23 @@
-const { Usuarios, Productos } = require("../DB");
+const { Usuarios, Carrito ,Comentarios } = require("../DB");
 const { encrypt } = require("../utils/handlerPassword");
 const { tokenSing } = require("../utils/handlerJwt");
 const { verificarToken } = require("../utils/handlerJwt");
 
 const getUsers = async () => {
-  const data = await Usuarios.findAll({
-    include: Productos,
-  });
+  const data = await Usuarios.findAll();
   return data;
 };
 
 const getUsersOne = async (req, res) => {
   const { id } = req.params;
 
-  const usersFound = await Usuarios.findByPk(
-    id,
-     {
-       include: Productos
-     }
-    );
-    
+  const usersFound = await Usuarios.findByPk(id, { include: Carrito});
+
   if (!usersFound) {
     res.status(404).send({ message: "NOT FOUND" });
     return;
   }
-  return usersFound;
+  return  [usersFound];
 };
 
 const postUsers = async (req, res) => {

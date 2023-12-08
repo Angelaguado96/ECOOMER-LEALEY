@@ -31,11 +31,13 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 
 const { 
-  Usuarios ,Login,Carrusel,Comentarios,Preguntas,Productos
+  Usuarios ,Login,Carrusel,Comentarios,Preguntas,Productos,Carrito
 } = sequelize.models;
 
-Usuarios.belongsToMany (Productos,{ through:"UsuarioProducto"})
-Productos.belongsToMany (Usuarios,{ through:"UsuarioProducto"})
+Usuarios.belongsToMany (Carrito,{ through:"UsuarioCarrito"})
+Carrito.belongsToMany (Usuarios,{ through:"UsuarioCarrito"})
+Comentarios.belongsTo(Usuarios)
+
 
 
 

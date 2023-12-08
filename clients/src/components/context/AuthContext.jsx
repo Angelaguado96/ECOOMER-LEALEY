@@ -8,11 +8,12 @@ import {
 import { toast } from "react-hot-toast";
 import { gapi } from "gapi-script";
 const ThemeContext = createContext();
+
 const clientID =
   "803702882587-60c5tpkaudh0hpj51pmb9ikfv37jjota.apps.googleusercontent.com";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-
+import Comentario from '../comentarios/Comentarios'
 export const useTheme = () => {
   const contex = useContext(ThemeContext);
   if (!contex) return "NO HAY CONTEXTO ";
@@ -45,7 +46,8 @@ export const ThemeProvider = ({ children }) => {
       setAutorisado(true);
       singin(datosGoogle);
     } catch (error) {
-      console.log(error);
+
+    console.log(error)
     }
   };
 
@@ -92,6 +94,7 @@ export const ThemeProvider = ({ children }) => {
       setAutorisado(false);
       setUser(null);
       localStorage.removeItem("token");
+      
     } catch (error) {
       console.log(error);
     }

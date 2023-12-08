@@ -16,7 +16,6 @@ const soloUnoProducto= async(req)=>{
 
 const crearProductos = async (req) => {
   const {
-    usuarioId,
     nombre,
     descripcion,
     tipo,
@@ -45,13 +44,8 @@ const crearProductos = async (req) => {
     colores
   });
 
-  //  relacion el producto con el ususaio
  
-    const  usuario = await Usuarios.findByPk(usuarioId) 
-    
-  if (usuario){
-     await   usuario.addProducto(creandoProducto)
-  }
+ 
 
   if (req.files?.imagen) {
     const imagenResualtado = await uploadImagen(req.files.imagen.tempFilePath);

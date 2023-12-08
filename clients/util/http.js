@@ -1,6 +1,6 @@
+"use client"
 
- "use client"
- import { setCarrusel ,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,setMyProduct} from "@/src/redux/slice";
+ import { setCarrusel ,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,setMyProduct,setCommentary} from "@/src/redux/slice";
  import axios from "../src/api/axios";
  import { toast } from "react-hot-toast";
 
@@ -119,5 +119,19 @@ export const allCarrucel = () => async (dispatch) => {
        }
 
     }
+
+    export const Commentary = (datos)=> async (dispatch)=>{
+       try {
+          const  {data} = await  axios.post(`/comments/add-comment`,datos)
+          console.log(data)
+          dispatch(setCommentary (data))
+       } catch (error) {
+          console.error ({error: error.message})
+       }
+    }
+
+   
+
+
 
 
