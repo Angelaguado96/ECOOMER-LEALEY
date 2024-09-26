@@ -14,7 +14,9 @@ export const storelSlice = createSlice({
     dataGrils:[],
     dataChildren:[],
     todalProductos:0,
-   listaProductos:[]
+   listaProductos:[],
+   historyProduct:[],
+   allComentarios:[],
   },
   reducers: {
     setCarrusel: (state, action) => {
@@ -42,15 +44,31 @@ export const storelSlice = createSlice({
       state.dataGrils = action.payload;
     },
     addProductosToCart :(state,action)=>{
-      state.listaProductos =[...state.listaProductos,action.payload]
-      state.todalProductos+=1
-    }
 
+      state.listaProductos =[...state.listaProductos,action.payload]
+
+      state.todalProductos+=1
+    },
+    setMyProduct:(state,action)=>{
+      state.historyProduct= action.payload;
+    },
+    setCommentary:(state,action)=>{
+      state.allComentarios= action.payload;
+    },
+    removeProductCart: (state, action) => {
+      const productToRemove = action.payload;
+      state.listaProductos = state.listaProductos.filter((p) =>
+        p.colores !== productToRemove.colores &&
+        ((p.tallaAdulto && p.tallaAdulto !== productToRemove.tallaAdulto) ||
+          (p.tallaKit && p.tallaKit !== productToRemove.tallaKit))
+      );
+      state.todalProductos -= 1;
+    }
   },
 });
-// console.log([...state.listaProductos,...action.payload])
-export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart} = storelSlice.actions;
-export default storelSlice.reducer;
+
+export const { setCarrusel,setProductos ,setOneProductos,setUsuarios ,setHombre,setMujer,setChildren,setGrils,addProductosToCart,setMyProduct,setCommentary,removeProductCart} = storelSlice.actions;
+
 
 
 

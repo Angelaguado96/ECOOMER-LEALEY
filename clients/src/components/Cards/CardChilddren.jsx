@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allChildren } from "@/util/http";
 import { Button } from "@nextui-org/react";
-
+import { useRouter } from "next/navigation";
 
 
 
@@ -15,7 +15,7 @@ import { Button } from "@nextui-org/react";
 
     const dispatch = useDispatch();
     const infoChildren = useSelector((state) => state.storeShopping.dataChildren);
-  
+    const router = useRouter()
     useEffect(() => {
       dispatch(allChildren());
     }, [dispatch]);
@@ -25,8 +25,7 @@ import { Button } from "@nextui-org/react";
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-  
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        {infoChildren === "NO SE ENCONTRO TOKEN" ? router.push('/login') :  <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {infoChildren.map((product) => (
               <div key={product.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -53,7 +52,7 @@ import { Button } from "@nextui-org/react";
                 </div>
               </div>
             ))}
-          </div>
+          </div> }
         </div>
       </div>
     )

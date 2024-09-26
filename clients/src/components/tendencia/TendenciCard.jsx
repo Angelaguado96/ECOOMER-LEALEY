@@ -11,8 +11,8 @@ const TendenciCard = () => {
      
  
   const dispatch = useDispatch();
-  const datos = useSelector((state)=>state.storeShopping.dataProductos)
-   const tendencia = datos.filter((item)=>item.tendencia === 'true')
+  const datos = useSelector((state)=>state.storeShopping?.dataProductos)
+   const tendencia = datos?.filter((item)=>item.tendencia === 'true')
   useEffect(() =>{
      dispatch(allProductos())
   },[dispatch])
@@ -23,7 +23,7 @@ const TendenciCard = () => {
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 m-10">
       <TrendenciList></TrendenciList>
     
-      {tendencia.map((item, index) => (
+      {tendencia?.map((item, index) => (
         
         <Card
           shadow="sm"
@@ -39,7 +39,7 @@ const TendenciCard = () => {
               width="100%"
               alt='iamgen'
               className="w-full object-cover h-[140px]"
-              src={item.imagen.secure_url}
+              src={item?.imagen?.secure_url}
             />
             </Link> 
           </CardBody>

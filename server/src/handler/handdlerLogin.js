@@ -1,11 +1,17 @@
 const {postLogin,cerrarSesion}= require('../controllers/ControlerLogin')
+const {handlerError}= require('../utils/handlerError')
+
+
+
+
+
+
 
 const createLogin=async (req,res)=>{
    try {  
        res.status(200).json(await postLogin(req,res))
    } catch (error) {
-      console.error('Error en el servidor:', error);
-      res.status(500).send({ message: 'Error en el servidor' });
+        handlerError(res,"ERROR EN CRETAE LOGIN",error)
    }
 }
 
@@ -13,7 +19,7 @@ const logout = async (req, res)=>{
 try {
     res.status(200).json(await cerrarSesion(req,res))
 } catch (error) {
-   res.status(400).send('error')
+     handlerError(res,"ERROR EN POST LOGOUT",error)
 }
 }
 
@@ -23,7 +29,7 @@ const perfil = async (req, res) => {
       res.status(200).json('pefile');
       
    } catch (error) {
-       res.status(400).json({error: error.message});
+      handlerError(res,"ERROR EN GET PROFILE",error)
    }
 };
 

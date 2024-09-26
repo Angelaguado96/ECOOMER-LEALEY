@@ -1,27 +1,48 @@
-"use client"
-import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
+"use client";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Avatar,
+  Button,
+} from "@nextui-org/react";
 import { useState } from "react";
 
 
-
-
-
 const Comentarios = () => {
-   const [isFollowed, setIsFollowed] = useState(false);
-   return (
-       <>
-       
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [rating, setRating] = useState(0);
+  console.log(rating);
+  const handleStarClick = (selectedRating) => {
+    setRating(selectedRating);
+  };
+  return (
+    <>
       <Card className="max-w-[340px] m-10">
         <CardHeader className="justify-between">
           <div className="flex gap-5">
-            <Avatar isBordered radius="full" size="md" src="/avatars/avatar-1.png" />
+            <Avatar
+              isBordered
+              radius="full"
+              size="md"
+              src="/avatars/avatar-1.png"
+            />
             <div className="flex flex-col gap-1 items-start justify-center">
-              <h4 className="text-small font-semibold leading-none text-default-600">Zoey Lang</h4>
-              <h5 className="text-small tracking-tight text-default-400">@zoeylang</h5>
+              <h4 className="text-small font-semibold leading-none text-default-600">
+                Zoey Lang
+              </h4>
+              <h5 className="text-small tracking-tight text-default-400">
+                @zoeylang
+              </h5>
             </div>
           </div>
           <Button
-            className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
+            className={
+              isFollowed
+                ? "bg-transparent text-foreground border-default-200"
+                : ""
+            }
             color="primary"
             radius="full"
             size="sm"
@@ -33,14 +54,24 @@ const Comentarios = () => {
         </CardHeader>
         <CardBody className="px-3 py-0 text-small text-default-400">
           <p>
-            Frontend developer and UI/UX enthusiast. Join me on this coding adventure!
+            Frontend developer and UI/UX enthusiast. Join me on this coding
+            adventure!
           </p>
-          <span className="pt-2">
-            #FrontendWithZoey 
-            <span className="py-2" aria-label="computer" role="img">
-              💻
-            </span>
-          </span>
+
+          <div className="flex items-center">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                onClick={() => handleStarClick(star)}
+                className={`cursor-pointer text-3xl ${
+                  star <= rating ? "text-yellow-500" : "text-gray-300"
+                }`}
+              >
+                &#9733;
+              </span>
+            ))}
+            <p className="ml-2">Tu calificación: {rating}</p>
+          </div>
         </CardBody>
         <CardFooter className="gap-3">
           <div className="flex gap-1">
@@ -54,11 +85,10 @@ const Comentarios = () => {
         </CardFooter>
       </Card>
       <div className="flex flex-col">
-      <h1> Testimonios de Nuestro clientes</h1>
+        <h1> Testimonios de Nuestro clientes</h1>
       </div>
-      </>
+    </>
+  );
+};
 
-    );
-}
-
-export default Comentarios
+export default Comentarios;

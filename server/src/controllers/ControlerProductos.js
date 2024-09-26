@@ -1,4 +1,4 @@
-const { Productos } = require("../DB");
+const { Productos ,Usuarios} = require("../DB");
 const { uploadImagen } = require("../servise/claudinary");
 
 const peticionProductos = async () => {
@@ -24,8 +24,12 @@ const crearProductos = async (req) => {
     precio,
     tendencia,
     imagen,
+    tallaAdulto,
+    tallaKit,
+    colores
   } = req.body;
-    console.log(precio)
+
+ console.log("dara" ,req.body)
   const creandoProducto = await Productos.create({
     nombre,
     descripcion,
@@ -35,7 +39,13 @@ const crearProductos = async (req) => {
     precio,
     tendencia,
     imagen,
+    tallaAdulto,
+    tallaKit,
+    colores
   });
+
+ 
+ 
 
   if (req.files?.imagen) {
     const imagenResualtado = await uploadImagen(req.files.imagen.tempFilePath);

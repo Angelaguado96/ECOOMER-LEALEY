@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { allHombre } from "@/util/http";
 import { Button } from "@nextui-org/react";
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
+
 
 export default function CardHombre() {
   const dispatch = useDispatch();
-  const infoHombre = useSelector((state) => state.storeShopping.dataHombre);
+  const infoHombre = useSelector((state) => state.storeShopping?.dataHombre);
   console.log(infoHombre);
+  const router = useRouter()
+
 
   useEffect(() => {
     dispatch(allHombre());
@@ -21,14 +25,13 @@ export default function CardHombre() {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           SHOPPING QHPHA P`ACHA
         </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {infoHombre.map((product) => (
+        {infoHombre === 'NO SE ENCONTRO TOKEN' ?  router.push('/login') : <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {infoHombre?.map((product) => (
             <div key={product.id} className="group relative">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
-                  src={product.imagen.secure_url}
-                  alt={product.imagen.secure_url}
+                  src={product?.imagen?.secure_url}
+                  alt={product?.imagen?.secure_url}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
               </div>
@@ -49,14 +52,15 @@ export default function CardHombre() {
               </div>
               <div className="h-5 w-20">
               </div>
-              <Link href={`/detalles/${product.id}`}>
-              <Button className="h-6 w-15" color="danger">
+              <Button className="h-6 w-15 bg-Dangers" >
+              <Link href={`/detalles/${product.id}`} prefetch>
                   Detalle
-                </Button>
               </Link> 
+                </Button>
             </div>
           ))}
-        </div>
+        </div>}
+       
       </div>
     </div>
   );

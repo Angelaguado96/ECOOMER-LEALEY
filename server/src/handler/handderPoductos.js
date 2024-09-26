@@ -1,5 +1,5 @@
 const { crearProductos,peticionProductos,deliteProductos,soloUnoProducto}=require('../controllers/ControlerProductos')
-
+const {handlerError}= require('../utils/handlerError')
 
 
 
@@ -9,7 +9,7 @@ const getProducto = async  (req, res) => {
   try {
     res.status(200).json(await peticionProductos());
   } catch (error) {
-   res.status.send({error:error.message});
+    handlerError(res,"ERROR EN GET PRODUCTO",error)
   }
 };
 
@@ -17,7 +17,7 @@ const getProducto = async  (req, res) => {
      try {
         res.status(200).json(await soloUnoProducto(req));
      } catch (error) { 
-       res.status(400).send({error:error.message});
+      handlerError(res,"ERROR EN GET_ONE PRODUCTO",error)
      } 
 
  }
@@ -26,7 +26,7 @@ const postProducto = async (req, res) => {
   try {
     res.status(200).json( await crearProductos(req));
   } catch (error) {
-   res.status(400).json({error:error.message});
+    handlerError(res,"ERROR EN POST  PRODUCTO",error);
   }
 };
 
@@ -34,7 +34,7 @@ const deleteProducto = (req, res) => {
   try {
     res.status(200).json("esttas en delete");
   } catch (error) {
-   res.status.send({error:error.message});
+    handlerError(res,"ERROR EN DELETE PRODUCTO",error)
   }
 };
 

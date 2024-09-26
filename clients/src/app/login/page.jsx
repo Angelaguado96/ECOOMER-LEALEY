@@ -105,7 +105,7 @@ const Login = () => {
                 />
               </label>
               <div className="w-full py-2   flex flex-col gap-4 items-center ">
-                <button className="btn-primary w-2/3 text-lg text-center  ">
+                <button className="btn-primary w-2/3 text-lg text-center ">
                   Login
                 </button>
                 <Link href="/registro" className="underline text-gray-600">

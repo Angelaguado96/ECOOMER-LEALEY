@@ -45,7 +45,6 @@ module.exports = (sequelize) => {
          }
         }
       },
-       
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -64,6 +63,18 @@ module.exports = (sequelize) => {
           },
         },
       },
+      colores:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+      },
+      tallaAdulto:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
+      },
+      tallaKit:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true, 
+      }
     },
     { timestamps: false }
   );

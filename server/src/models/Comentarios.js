@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
+
   sequelize.define(
     "Comentarios",
     {
@@ -10,17 +11,27 @@ module.exports = (sequelize) => {
         allowNull: false,
         autoIncrement: true,
       },
-      comentarios : {
+      nombre: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      correo:{
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      imagen: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      comentario: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      puntajes : {
-        type: DataTypes.STRING,
+      puntaje: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-      },   
+      },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
-
- 
 };

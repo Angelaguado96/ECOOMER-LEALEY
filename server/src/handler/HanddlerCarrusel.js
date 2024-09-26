@@ -1,6 +1,6 @@
 
 const {modificarCarrusel,createCarrusel, obtenerCarrusel,distroyCarrusel}=require('../controllers/ControllerCarrusel')
-
+const {handlerError}= require('../utils/handlerError')
 
 
 
@@ -9,7 +9,7 @@ const getCarrusel= async(req,res)=>{
  try {
     res.status(200).json(await obtenerCarrusel())
  } catch (error) {
-   res.status(404).send({error:error.message})
+  handlerError(res,"ERROR EN GET CARRUSEL",error)
  }
 
 }
@@ -20,7 +20,7 @@ const postCarrusel= async (req,res)=>{
 
     res.status(200).json(await createCarrusel(req))
  } catch (error) {
-   res.status(404).send({error:error.message})
+  handlerError(res,"ERROR EN POST CARRISEL",error)
  }
 
 }
@@ -30,7 +30,7 @@ const putCarrusel= async (req,res)=>{
 
     res.status(200).json(await modificarCarrusel())
  } catch (error) {
-   res.status(404).send({error:error.message})
+  handlerError(res,"ERROR EN PUT CARRUSEL",error)
  }
 
 }
@@ -42,7 +42,7 @@ const deleteCarrusel= async (req,res)=>{
     
     res.status(200).json(await distroyCarrusel(id))
  } catch (error) {
-   res.status(404).send({error:error.message})
+  handlerError(res,"ERROR EN DELETE CARRUSEL",error)
  }
 
 }
